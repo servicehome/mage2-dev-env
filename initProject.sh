@@ -25,7 +25,7 @@ function setupHomestead() {
   $PHP_BIN vendor/bin/homestead make &&
     [ -f "$HOMESTEAD_CONFIG_FILE" ] &&
     cp "$HOMESTEAD_CONFIG_FILE" "$HOMESTEAD_CONFIG_FILE.backup" &&
-    awk '/\/home\/vagrant\/code$/ {print "\t\ttype: \"nfs\""}1' <"$HOMESTEAD_CONFIG_FILE.backup" | awk '/to: \/home\/vagrant\/code\/public/ { print "\t\ttype: apache\n\t\tphp: \"7.2\"" }1' >"$HOMESTEAD_CONFIG_FILE"
+    awk '/\/home\/vagrant\/code$/ {print "        type: \"nfs\""}1' <"$HOMESTEAD_CONFIG_FILE.backup" | awk '/to: \/home\/vagrant\/code\/public/ { print "        type: apache\n        php: \"7.2\"" }1' >"$HOMESTEAD_CONFIG_FILE"
 }
 
 if [ ! -e "$DIRECTORY" ]; then
