@@ -5,6 +5,7 @@ PHP_BIN=$(command -v php)
 
 DIRECTORY="mage23"
 HOMESTEAD_CONFIG_FILE="Homestead.yaml"
+MAGE_INIT_TEMPLATE="mageInit.template"
 MAGE_INIT_SCRIPT="mageInit.sh"
 
 MAGE_VERSION="^2.3"
@@ -49,7 +50,7 @@ function setupHomestead() {
 }
 
 function setupAfterScript() {
-  awk '{ gsub(/!!!DOMAIN!!!/, "'$SHOP_DOMAIN_NAME'"); gsub(/!!!_BACKEND_FRONTNAME!!!/, "'$_BACKEND_FRONTNAME'"); gsub(/!!!_ADMIN_LOGIN!!!/, "'$_ADMIN_LOGIN'"); gsub(/!!!_ADMIN_PWD!!!/, "'$_ADMIN_PWD'"); ; gsub(/!!!_ADMIN_FIRSTNAME!!!/, "'$_ADMIN_FIRSTNAME'"); ; gsub(/!!!_ADMIN_LASTNAME!!!/, "'$_ADMIN_LASTNAME'");  gsub(/!!!_ADMIN_EMAIL!!!/, "'$_ADMIN_EMAIL'"); gsub(/!!!PHP_CLI_VERSION!!!/, "'$PHP_VERSION'") }1' <"../$MAGE_INIT_SCRIPT" >"$MAGE_INIT_SCRIPT" &&
+  awk '{ gsub(/!!!DOMAIN!!!/, "'$SHOP_DOMAIN_NAME'"); gsub(/!!!_BACKEND_FRONTNAME!!!/, "'$_BACKEND_FRONTNAME'"); gsub(/!!!_ADMIN_LOGIN!!!/, "'$_ADMIN_LOGIN'"); gsub(/!!!_ADMIN_PWD!!!/, "'$_ADMIN_PWD'"); ; gsub(/!!!_ADMIN_FIRSTNAME!!!/, "'$_ADMIN_FIRSTNAME'"); ; gsub(/!!!_ADMIN_LASTNAME!!!/, "'$_ADMIN_LASTNAME'");  gsub(/!!!_ADMIN_EMAIL!!!/, "'$_ADMIN_EMAIL'"); gsub(/!!!PHP_CLI_VERSION!!!/, "'$PHP_VERSION'") }1' <"../$MAGE_INIT_TEMPLATE" >"$MAGE_INIT_SCRIPT" &&
     chmod +x "$MAGE_INIT_SCRIPT" &&
     echo "./code/$MAGE_INIT_SCRIPT" >>after.sh
 }
